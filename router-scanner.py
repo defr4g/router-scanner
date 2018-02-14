@@ -1,10 +1,6 @@
-# Autor: João (@hackerftsg)
-# Versão: 1.0.0
-
-# CÓPIA NÃO COMÉDIA
-
 from sys import modules, argv
 from re import match, findall
+from multiprocessing import cpu_count
 
 try:
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -69,8 +65,9 @@ def scanner(url):
 if __name__ == "__main__":
     setattr(this, "__author__", "João (@hackerftsg)")
     setattr(this, "__version__", "1.2.0")
-    setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas" % argv[0])
-    setattr(this, "__msg__", "• Roteador encontrado: {link}\t\tModelo: {model}")
+    setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas\n"
+                               "• Número de tarefas recomendadas para seu PC: %d" % (argv[0], cpu_count() ** 2))
+    setattr(this, "__msg__", "• Roteador encontrado: {link}    \tModelo: {model}")
 
     print(Banner(__author__, __version__), end="\n\n")
 
@@ -105,4 +102,3 @@ if __name__ == "__main__":
 
     if len(found_routers) == 0:
         print("• Nenhum roteador foi encontrado")
-
