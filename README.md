@@ -4,6 +4,11 @@
 Um simples scanner para procurar e salvar roteadores em massa.
 
 Usando um sistema de paralelismo com multiprocesso para ficar com uma grande velocidade.
+# versão do python
+**Utilize a versão 3!**
+# instalações iniciais
+    python -m pip install netaddr
+    python -m pip install requests
 # sintaxe de usagem
     python router-scanner.py primeiro_ip segundo_ip numero_de_tarefas
 # exemplo de usagem
