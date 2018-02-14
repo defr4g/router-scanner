@@ -1,6 +1,8 @@
 # router-scanner
 **Versão atual: 1.0.4**
 
+**TODO: Ataque de força bruta na autenticação dos roteadores e serviços.
+
 Um simples scanner para procurar e salvar roteadores em massa.
 
 Usando um sistema de paralelismo com multiprocesso para ficar com uma grande velocidade.
