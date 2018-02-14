@@ -1,5 +1,5 @@
 # Autor: João (@hackerftsg)
-# Versão: 1.0.7
+# Versão: 1.0.8
 # Cópia não comédia
 
 from sys import modules, argv
@@ -25,10 +25,10 @@ global this, ports, routers, found_routers, selected_routers, do_filter
 this = modules[__name__]
 ports = [80, 8080, 8081, 8181]
 routers = [
-    ("TP-LINK", r"TP-LINK Technologies|Roteador Wireless N", ("/")),
-    ("pfSense", r"Rubicon Communications", ("/")),
-    ("RouterOS", r"RouterOS router configuration page", ("/")),
-    ("Cisco", r"copyright\.js|Cisco SPA Configuration", ("/")),
+    ("TP-LINK", r"TP-LINK Technologies|Roteador Wireless N", False),
+    ("pfSense", r"Rubicon Communications", False),
+    ("RouterOS", r"RouterOS router configuration page", False),
+    ("Cisco", r"copyright\.js|Cisco SPA Configuration", False),
     ("WebDAV", r"WebDAV testpage", ("/webdav")),
     ("phpMyAdmin", r"Donate to phpMyAdmin|phpMyAdmin.+setup", ("/phpmyadmin/scripts/setup.php")),
     ("WordPress", r"WordPress Version Badge|WordPress - Web publishing software", ("/wp-admin/css/about.css", "/license.txt")),
@@ -85,13 +85,18 @@ def scanner(url):
         r = s.get(url, timeout=2, verify=False)
         for x, y, z in routers:
             if x.lower() in selected_routers:
-                if len(z[0]) > 1:
+                if isinstance(z, tuple):
                     for a in z:
                         r = s.get(url + a, timeout=2, verify=False)
                         if len(findall(y, r.text)) > 0:
                             found_routers[url] = x
                             return {True: x}
-                else:
+                elif isinstance(z, bool):
+                    if len(findall(y, r.text)) > 0:
+                        found_routers[url] = x
+                        return {True: x}
+                elif isinstance(z, str):
+                    r = s.get(url + z, timeout=2, verify=False)
                     if len(findall(y, r.text)) > 0:
                         found_routers[url] = x
                         return {True: x}
@@ -108,7 +113,7 @@ if __name__ == "__main__":
     disable_warnings(category=InsecureRequestWarning)
 
     setattr(this, "__author__", "João (@hackerftsg)")
-    setattr(this, "__version__", "1.0.7")
+    setattr(this, "__version__", "1.0.8")
     setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas roteadores(opcional)\n\n"
                                "• Use o argumento 'show_examples' para ver os exemplos\n"
                                "• Use o argumento 'show_recommended para ver as recomendações\n"
@@ -183,4 +188,3 @@ if __name__ == "__main__":
         print(color.LIGHTRED_EX + "• Nenhum roteador foi encontrado")
     else:
         print(color.LIGHTGREEN_EX + "\n• Roteadores encontrados: %d" % len(found_routers))
-
