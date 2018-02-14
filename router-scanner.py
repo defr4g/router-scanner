@@ -31,9 +31,9 @@ routers = [
     ("Cisco", r"copyright\.js|Cisco SPA Configuration", ("/")),
     ("WebDAV", r"WebDAV testpage", ("/webdav")),
     ("phpMyAdmin", r"Donate to phpMyAdmin|phpMyAdmin.+setup", ("/phpmyadmin/scripts/setup.php")),
-    ("WordPress", r"WordPress Version Badge|WordPress - Web publishing software", ("/wp-admin/css/about.css", "license.txt")),
-    ("Joomla", r"Joomla!", ("web.config.txt")),
-    ("Drupal", r"ABOUT DRUPAL", ("README.txt"))
+    ("WordPress", r"WordPress Version Badge|WordPress - Web publishing software", ("/wp-admin/css/about.css", "/license.txt")),
+    ("Joomla", r"Joomla!", ("/web.config.txt")),
+    ("Drupal", r"ABOUT DRUPAL", ("/README.txt"))
 ]
 found_routers = {}
 selected_routers = []
@@ -183,3 +183,4 @@ if __name__ == "__main__":
         print(color.LIGHTRED_EX + "• Nenhum roteador foi encontrado")
     else:
         print(color.LIGHTGREEN_EX + "\n• Roteadores encontrados: %d" % len(found_routers))
+
