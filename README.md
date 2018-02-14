@@ -9,9 +9,9 @@ Usando um sistema de paralelismo com multiprocesso para ficar com uma grande vel
 # versão do python
 **Utilize a versão 3!**
 # instalações iniciais
-    python -m pip install netaddr
-    python -m pip install requests
-    python -m pip install colorama
+    python -m pip install -U netaddr
+    python -m pip install -U requests
+    python -m pip install -U colorama
 # sintaxe de usagem
     python router-scanner.py primeiro_ip segundo_ip numero_de_tarefas
     python router-scanner.py primeiro_ip segundo_ip numero_de_tarefas roteadores(opcional)
