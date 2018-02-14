@@ -1,5 +1,5 @@
 # Autor: João (@hackerftsg)
-# Versão: 1.0.3
+# Versão: 1.0.4
 # Cópia não comédia
 
 from sys import modules, argv
@@ -25,7 +25,10 @@ routers = [
     ("RouterOS", r"RouterOS router configuration page", ("/")),
     ("Cisco", r"copyright\.js|Cisco SPA Configuration", ("/")),
     ("WebDAV", r"WebDAV testpage", ("/webdav")),
-    ("phpMyAdmin", r"Donate to phpMyAdmin|phpMyAdmin.+setup", ("/phpmyadmin/scripts/setup.php"))
+    ("phpMyAdmin", r"Donate to phpMyAdmin|phpMyAdmin.+setup", ("/phpmyadmin/scripts/setup.php")),
+    ("WordPress", r"WordPress Version Badge|WordPress - Web publishing software", ("/wp-admin/css/about.css", "license.txt")),
+    ("Joomla", r"Joomla!", ("web.config.txt")),
+    ("Drupal", r"ABOUT DRUPAL", ("README.txt"))
 ]
 found_routers = {}
 selected_routers = []
