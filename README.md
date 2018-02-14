@@ -1,5 +1,5 @@
 # router-scanner
-**Versão atual: 1.0.6**
+**Versão atual: 1.0.7**
 
 **TODO: Ataque de força bruta na autenticação dos roteadores e serviços.**
 
@@ -37,3 +37,5 @@ Usando um sistema de paralelismo com multiprocesso para ficar com uma grande vel
 **1.0.5** - Bugs resolvidos ***Atualizado em 14/02/2018***
 
 **1.0.6** - Parar scan com Ctrl C e cores adicionads ***Atualizado em 14/02/2018***
+
+**1.0.7** - Ignorando certificados SSL ***Atualizado em 14/02/2018***
