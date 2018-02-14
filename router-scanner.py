@@ -68,7 +68,7 @@ def scanner(url):
 
 if __name__ == "__main__":
     setattr(this, "__author__", "João (@hackerftsg)")
-    setattr(this, "__version__", "1.2.0")
+    setattr(this, "__version__", "1.0.2")
     setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas\n"
                                "• Número de tarefas recomendadas para seu PC: %d" % (argv[0], cpu_count() ** 2))
     setattr(this, "__msg__", "• Roteador encontrado: {link}    \tModelo: {model}")
