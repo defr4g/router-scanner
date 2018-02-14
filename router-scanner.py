@@ -1,16 +1,19 @@
 # Autor: João (@hackerftsg)
-# Versão: 1.0.5
+# Versão: 1.0.6
 # Cópia não comédia
 
 from sys import modules, argv
 from re import match, findall
+from os import name
 from multiprocessing import cpu_count
 
 try:
     from concurrent.futures import ThreadPoolExecutor, as_completed
+    from concurrent.futures.thread import _threads_queues
     from functools import reduce
     from requests import session
     from requests.exceptions import ConnectionError, ReadTimeout
+    from colorama import init as color_handler, Fore as color
     from netaddr import IPRange
     from netaddr.core import AddrFormatError
 except ImportError as err:
@@ -96,8 +99,11 @@ def scanner(url):
 
 
 if __name__ == "__main__":
+    if name == "nt":
+        color_handler(autoreset=True)
+
     setattr(this, "__author__", "João (@hackerftsg)")
-    setattr(this, "__version__", "1.0.5")
+    setattr(this, "__version__", "1.0.6")
     setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas roteadores(opcional)\n\n"
                                "• Use o argumento 'show_examples' para ver os exemplos\n"
                                "• Use o argumento 'show_recommended para ver as recomendações\n"
@@ -111,9 +117,9 @@ if __name__ == "__main__":
     setattr(this, "__recommended__", "• Número de tarefas recomendadas para seu PC: %d\n"
                                      "• Nunca use muitas tarefas caso seu PC for fraco" % cpu_count() ** 2)
     setattr(this, "__routers__", "".join(["• Roteador: '" + x[0].lower() + "'\n" for x in routers]).rstrip("\n"))
-    setattr(this, "__msg__", "• Roteador encontrado: {link}        \tModelo: {model}")
+    setattr(this, "__msg__", "• Roteador encontrado: " + color.LIGHTMAGENTA_EX + "{link}" + color.LIGHTCYAN_EX + "\tModelo: "  + color.LIGHTMAGENTA_EX + "{model}")
 
-    print(Banner(__author__, __version__), end="\n\n")
+    print(color.LIGHTYELLOW_EX + str(Banner(__author__, __version__)), end="\n\n")
 
     if "show_examples" in argv:
         exit(__examples__)
@@ -152,14 +158,24 @@ if __name__ == "__main__":
 
     with ThreadPoolExecutor(max_workers=int(argv[3])) as executor:
         workers = {executor.submit(scanner, x): x for x in urls}
-        for worker in as_completed(workers):
-            data = list(reduce(lambda x, y: x + y, worker.result().items()))
-            if data[0]:
-                print(__msg__.format(link=workers[worker],
-                                     model=data[1]))
+        try:
+            for worker in as_completed(workers):
+                data = list(reduce(lambda x, y: x + y, worker.result().items()))
+                if data[0]:
+                    print(color.LIGHTCYAN_EX + __msg__.format(link=workers[worker],
+                                         model=data[1]))
+        except KeyboardInterrupt:
+            executor._threads.clear()
+            _threads_queues.clear()
 
-    for x, y in found_routers.items():
-        print("%s: %s" % (y, x), file=open("found_routers.txt", "a"))
+    try:
+        for x, y in found_routers.items():
+            print("%s: %s" % (y, x), file=open("found_routers.txt", "a"))
+    except (KeyboardInterrupt, RuntimeError):
+        pass
 
     if len(found_routers) == 0:
-        print("• Nenhum roteador foi encontrado")
+        print(color.LIGHTRED_EX + "• Nenhum roteador foi encontrado")
+    else:
+        print(color.LIGHTGREEN_EX + "\n• Roteadores encontrados: %d" % len(found_routers))
+
