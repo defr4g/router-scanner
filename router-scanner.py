@@ -1,16 +1,18 @@
 # Autor: João (@hackerftsg)
-# Versão: 1.0.6
+# Versão: 1.0.7
 # Cópia não comédia
 
 from sys import modules, argv
 from re import match, findall
 from os import name
 from multiprocessing import cpu_count
+from urllib3.exceptions import InsecureRequestWarning, InsecurePlatformWarning
+from urllib3 import disable_warnings
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures.thread import _threads_queues
+from functools import reduce
 
 try:
-    from concurrent.futures import ThreadPoolExecutor, as_completed
-    from concurrent.futures.thread import _threads_queues
-    from functools import reduce
     from requests import session
     from requests.exceptions import ConnectionError, ReadTimeout
     from colorama import init as color_handler, Fore as color
@@ -80,12 +82,12 @@ def scanner(url):
         s = session()
         s.trust_env = False
         s.max_redirects = 1
-        r = s.get(url, timeout=2)
+        r = s.get(url, timeout=2, verify=False)
         for x, y, z in routers:
             if x.lower() in selected_routers:
                 if len(z[0]) > 1:
                     for a in z:
-                        r = s.get(url + a, timeout=2)
+                        r = s.get(url + a, timeout=2, verify=False)
                         if len(findall(y, r.text)) > 0:
                             found_routers[url] = x
                             return {True: x}
@@ -102,8 +104,11 @@ if __name__ == "__main__":
     if name == "nt":
         color_handler(autoreset=True)
 
+    disable_warnings(category=InsecurePlatformWarning)
+    disable_warnings(category=InsecureRequestWarning)
+
     setattr(this, "__author__", "João (@hackerftsg)")
-    setattr(this, "__version__", "1.0.6")
+    setattr(this, "__version__", "1.0.7")
     setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas roteadores(opcional)\n\n"
                                "• Use o argumento 'show_examples' para ver os exemplos\n"
                                "• Use o argumento 'show_recommended para ver as recomendações\n"
@@ -178,4 +183,3 @@ if __name__ == "__main__":
         print(color.LIGHTRED_EX + "• Nenhum roteador foi encontrado")
     else:
         print(color.LIGHTGREEN_EX + "\n• Roteadores encontrados: %d" % len(found_routers))
-
