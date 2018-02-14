@@ -1,5 +1,5 @@
 # Autor: João (@hackerftsg)
-# Versão: 1.0.2
+# Versão: 1.0.3
 # Cópia não comédia
 
 from sys import modules, argv
