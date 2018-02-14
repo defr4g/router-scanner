@@ -1,5 +1,5 @@
 # router-scanner
-**Versão atual: 1.0.3**
+**Versão atual: 1.0.4**
 
 Um simples scanner para procurar e salvar roteadores em massa.
 
@@ -25,6 +25,8 @@ Usando um sistema de paralelismo com multiprocesso para ficar com uma grande vel
 
 **1.0.1** - Supressão de erros adicionadas ***Atualizado em 14/02/2018***
 
-**1.0.2** - Novos serviços adicionados ***Atualizado em 14/02/2018***
+**1.0.2** - Novos serviços adicionados (WebDAV, phpMyAdmin) ***Atualizado em 14/02/2018***
 
 **1.0.3** - Bugs resolvidos e sistema de filtro adicionado ***Atualizado em 14/02/2018***
+
+**1.0.4** - Novos serviços adicionados (WordPress, Joomla, Drupal) ***Atualizado em 14/02/2018***
