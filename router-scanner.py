@@ -1,5 +1,6 @@
 # Autor: João (@hackerftsg)
 # Versão: 1.0.0
+
 # CÓPIA NÃO COMÉDIA
 
 from sys import modules, argv
@@ -18,12 +19,14 @@ except ImportError as err:
 global this, ports, routers, found_routers
 this = modules[__name__]
 ports = [80, 8080, 8081, 8181]
-routers = {
-    "TP-LINK" : r"TP-LINK Technologies|Roteador Wireless N",
-    "pfSense" : r"Rubicon Communications",
-    "RouterOS": r"RouterOS router configuration page",
-    "Cisco"   : r"copyright\.js|Cisco SPA Configuration"
-}
+routers = [
+    ("TP-LINK", r"TP-LINK Technologies|Roteador Wireless N", "/"),
+    ("pfSense", r"Rubicon Communications", "/"),
+    ("RouterOS", r"RouterOS router configuration page", "/"),
+    ("Cisco", r"copyright\.js|Cisco SPA Configuration", "/"),
+    ("WebDAV", r"WebDAV testpage", "/webdav"),
+    ("phpMyAdmin", r"Donate to phpMyAdmin|phpMyAdmin.+setup", "/phpmyadmin/scripts/setup.php")
+]
 found_routers = {}
 
 
@@ -37,7 +40,7 @@ class Banner(object):
                 "• Working on - {values}\n"
                 "• Versão     - {version}".format(
                 author=self.author,
-                values=", ".join([x for x in routers.keys()]),
+                values=", ".join([x[0] for x in routers]),
                 version=self.version))
 
 
@@ -52,7 +55,9 @@ class IPAddress(object):
 def scanner(url):
     try:
         req = rget(url, timeout=2)
-        for x, y in routers.items():
+        for x, y, z in routers:
+            if z != "/":
+                req = rget(url + z, timeout=2)
             if len(findall(y, req.text)) > 0:
                 found_routers[url] = x
                 return {True: x}
@@ -63,8 +68,8 @@ def scanner(url):
 
 if __name__ == "__main__":
     setattr(this, "__author__", "João (@hackerftsg)")
-    setattr(this, "__version__", "1.0.0")
-    setattr(this, "__usage__", "• Usagem: python %s 192.168.0.1 192.168.1.0 threads" % argv[0])
+    setattr(this, "__version__", "1.2.0")
+    setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas" % argv[0])
     setattr(this, "__msg__", "• Roteador encontrado: {link}\t\tModelo: {model}")
 
     print(Banner(__author__, __version__), end="\n\n")
@@ -97,3 +102,7 @@ if __name__ == "__main__":
 
     for x, y in found_routers.items():
         print("%s: %s" % (y, x), file=open("found_routers.txt", "a"))
+
+    if len(found_routers) == 0:
+        print("• Nenhum roteador foi encontrado")
+
