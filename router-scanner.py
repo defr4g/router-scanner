@@ -1,5 +1,5 @@
 # Autor: João (@hackerftsg)
-# Versão: 1.0.4
+# Versão: 1.0.5
 # Cópia não comédia
 
 from sys import modules, argv
@@ -83,9 +83,13 @@ def scanner(url):
                 if len(z[0]) > 1:
                     for a in z:
                         r = s.get(url + a, timeout=2)
-                if len(findall(y, r.text)) > 0:
-                    found_routers[url] = x
-                    return {True: x}
+                        if len(findall(y, r.text)) > 0:
+                            found_routers[url] = x
+                            return {True: x}
+                else:
+                    if len(findall(y, r.text)) > 0:
+                        found_routers[url] = x
+                        return {True: x}
         return {False: ""}
     except (ConnectionError, ReadTimeout):
         return {False: ""}
@@ -93,7 +97,7 @@ def scanner(url):
 
 if __name__ == "__main__":
     setattr(this, "__author__", "João (@hackerftsg)")
-    setattr(this, "__version__", "1.0.3")
+    setattr(this, "__version__", "1.0.5")
     setattr(this, "__usage__", "• Usagem: python %s primeiro_ip segundo_ip tarefas roteadores(opcional)\n\n"
                                "• Use o argumento 'show_examples' para ver os exemplos\n"
                                "• Use o argumento 'show_recommended para ver as recomendações\n"
