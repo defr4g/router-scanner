@@ -10,10 +10,9 @@ Usando um sistema de paralelismo com multiprocesso para ficar com uma grande vel
 - [x] Scan com múltiplas portas e múltiplos roteadores e serviços
 - [x] Correção e supressão de erros e bugs comuns
 - [x] Cores no foreground
-- [] Scan intensivo no servidor explorando diversas falhas
-- [] Ataque de força bruta
-- [] Verificação da tecnologia da máquina
-
+- [ ] Scan intensivo no servidor explorando diversas falhas
+- [ ] Ataque de força bruta
+- [ ] Verificação da tecnologia da máquina
 ### versão do python
 **Utilize a versão 3!**
 ### instalações iniciais
