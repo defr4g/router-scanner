@@ -1,6 +1,7 @@
 # router-scanner
 ### INFORMAÇÕES
 **Feito por João (@hackerftsg) / d3z3n0v3**
+
 **Versão: 1.0.8**
 
 Um simples scanner para procurar e salvar roteadores em massa
