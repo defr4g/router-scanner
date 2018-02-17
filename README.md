@@ -1,10 +1,12 @@
 # router-scanner
-**Versão atual: 1.0.8**
+### INFORMAÇÕES
+**Feito por João (@hackerftsg) / d3z3n0v3**
+**Versão: 1.0.8**
 
 Um simples scanner para procurar e salvar roteadores em massa
 
 Usando um sistema de paralelismo com multiprocesso para ficar com uma grande velocidade
-### características
+### CARACTERÍSTICAS
 - [x] Sistema de paralelismo com multitarefa/multiprocesso e filtro do scan
 - [x] Scan com um alcance entre 2 endereços de ip
 - [x] Scan com múltiplas portas e múltiplos roteadores e serviços
@@ -13,24 +15,25 @@ Usando um sistema de paralelismo com multiprocesso para ficar com uma grande vel
 - [ ] Scan intensivo no servidor explorando diversas falhas
 - [ ] Ataque de força bruta
 - [ ] Verificação da tecnologia da máquina
-### versão do python
-**Utilize a versão 3!**
-### instalações iniciais
+- [ ] Suporte para versão 2.7 do python
+### PYTHON
+**Utilize a versão 3 para cima!**
+### INSTALAÇÕES INICIAIS
     python -m pip install -U netaddr
     python -m pip install -U requests
     python -m pip install -U colorama
-### sintaxe de usagem
+### SINTAXE
     python router-scanner.py primeiro_ip segundo_ip numero_de_tarefas
     python router-scanner.py primeiro_ip segundo_ip numero_de_tarefas roteadores(opcional)
-### exemplo de usagem
+### EXEMPLOS
     python router-scanner.py 200.0.13.1 200.0.14.255 10
     python router-scanner.py 200.0.13.1 200.0.13.255 10 phpmyadmin
     python router-scanner.py 200.0.13.1 200.0.13.255 10 tp-link,routeros
-### comandos de ajuda
+### COMANDOS
     python router-scanner.py show_examples
     python router-scanner.py show_recommended
     python router-scanner.py show_routers
-### atualizações
+### ATUALIZAÇÕES
 **1.0.0** - Bugs resolvidos ***Atualizado em 14/02/2018***
 
 **1.0.1** - Supressão de erros adicionadas ***Atualizado em 14/02/2018***
