@@ -1,7 +1,3 @@
-# Autor: João (@hackerftsg)
-# Versão: 1.0.8
-# Cópia não comédia
-
 from sys import modules, argv
 from re import match, findall
 from os import name
