@@ -17,6 +17,8 @@ Usando um sistema de paralelismo com multiprocesso para ficar com uma grande vel
 - [ ] Ataque de força bruta
 - [ ] Verificação da tecnologia da máquina
 - [ ] Suporte para versão 2.7 do python
+- [ ] Servidor web com Flask
+- [ ] Instalação setup.py
 ### PYTHON
 **Utilize a versão 3 para cima!**
 ### INSTALAÇÕES INICIAIS
