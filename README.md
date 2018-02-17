@@ -4,7 +4,7 @@
 
 **Versão: 1.0.8**
 
-Um simples scanner para procurar e salvar roteadores em massa
+Um scanner simples para procurar e salvar roteadores em massa
 
 Usando um sistema de paralelismo com multiprocesso para ficar com uma grande velocidade
 ### CARACTERÍSTICAS
